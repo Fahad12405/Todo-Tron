@@ -1,0 +1,54 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "airbnb",
+    "prettier",
+    "plugin:react/jsx-runtime"
+  ],
+  "overrides": [
+    // override "simple-import-sort" config
+    {
+      "files": ["*.js", "*.jsx", "*.ts", "*.tsx"],
+      "rules": {
+        "simple-import-sort/imports": [
+          "error",
+          {
+            "groups": [
+              // Packages `react` related packages come first.
+              ["^react", "^@?\\w"],
+              // Internal packages.
+              ["^(@|components)(/.*|$)"],
+              // Side effect imports.
+              ["^\\u0000"],
+              // Parent imports. Put `..` last.
+              ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+              // Other relative imports. Put same-folder imports and `.` last.
+              ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
+              // Style imports.
+              ["^.+\\.?(css)$"]
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react", "simple-import-sort"],
+  "rules": {
+    "react/prop-types": "off",
+    "react/jsx-props-no-spreading": "off",
+    "indent": "error",
+    "arrow-body-style": "off",
+    "prefer-arrow-callback": "off",
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
+    "no-param-reassign": "off"
+  }
+}
